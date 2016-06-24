@@ -1,6 +1,7 @@
 import sbt.Keys._
 import sbt._
-import xerial.sbt.Pack._
+//import xerial.sbt.Pack._
+import com.earldouglas.xwp.TomcatPlugin
 
 object build extends Build {
   type Sett = Def.Setting[_]
@@ -32,7 +33,7 @@ object build extends Build {
   val project = Project (
     id = "base" ,
     base = file("."),
-    settings = Defaults.coreDefaultSettings ++ packAutoSettings ++
+    settings = Defaults.coreDefaultSettings ++
       Seq(
         organization := "com.example",
         name := "base",
@@ -40,7 +41,7 @@ object build extends Build {
         scalaVersion := versions("scala"),
         libraryDependencies ++= appDependencies
       )
-  )
+  ).enablePlugins(TomcatPlugin)
 
 }
 
